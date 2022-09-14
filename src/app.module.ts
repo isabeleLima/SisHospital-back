@@ -6,10 +6,10 @@ import { User } from './user/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { UsersService } from './user/user.service';
-import { Prontuario } from './model/prontuario/prontuario.entity';
-import { Paciente } from './model/paciente/paciente.entity';
-import { ProntuarioService } from './service/prontuario/prontuario.service';
-import { PacienteService } from './service/paciente/paciente.service';
+import { Prontuario } from './prontuario/prontuario.entity';
+import { Paciente } from './paciente/paciente.entity';
+import { ProntuarioService } from './prontuario/prontuario.service';
+import { PacienteService } from './paciente/paciente.service';
 @Module({
   imports: [
     ConfigModule.forRoot(),
