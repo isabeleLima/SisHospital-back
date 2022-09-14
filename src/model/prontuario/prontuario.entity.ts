@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity('prontuario')
 export class Prontuario {
     @PrimaryGeneratedColumn()
-    public id: bigint;
+    public id: number;
 
     @Column()
     public aberto: boolean;
