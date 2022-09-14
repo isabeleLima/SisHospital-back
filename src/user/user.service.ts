@@ -8,16 +8,16 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private User: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   findAll(): Promise<User[]> {
-    return this.User.find();
+    return this.userRepository.find();
   }
 
   findOne(id: string): Promise<User> {
     try {
-      return this.User.findOneByOrFail({ id });
+      return this.userRepository.findOneByOrFail({ id });
     } catch (error) {
       console.log(error);
       return error;
@@ -26,7 +26,7 @@ export class UsersService {
 
   findByEmail(email: string): Promise<User> {
     try {
-      return this.User.findOneByOrFail({ email });
+      return this.userRepository.findOneByOrFail({ email });
     } catch (error) {
       console.log(error);
       return error;
@@ -35,9 +35,9 @@ export class UsersService {
 
   async remove(id: string): Promise<void> {
     try {
-      const user = await this.User.findOneByOrFail({ id });
+      const user = await this.userRepository.findOneByOrFail({ id });
 
-      await this.User.delete(user.id);
+      await this.userRepository.delete(user.id);
     } catch (error) {
       console.log(error);
       return error;
@@ -46,6 +46,6 @@ export class UsersService {
 
   async create(user: CreateUserDto): Promise<User> {
     user.password = await bcrypt.hash(user.password, 10);
-    return this.User.save(user);
+    return this.userRepository.save(user);
   }
 }

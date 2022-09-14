@@ -23,6 +23,9 @@ import { PacienteService } from './service/paciente/paciente.service';
       synchronize: true,
       entities: [User, Prontuario, Paciente],
     }),
+    TypeOrmModule.forFeature([
+			User, Paciente, Prontuario
+		]),
     UserModule,
     AuthModule,
   ],
