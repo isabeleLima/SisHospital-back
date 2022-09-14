@@ -1,5 +1,5 @@
 import { IsString, IsEmail, IsEnum, Matches } from 'class-validator';
-import { TypesEnum } from 'src/commons/typs.enum';
+import { TypesEnum } from '../../commons/typs.enum';
 
 export class CreateUserDto {
   @IsString()
