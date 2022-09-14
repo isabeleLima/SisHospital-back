@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { ProntuarioDto } from "src/model/prontuario/dto/prontuario.dto";
-import { ProntuarioService } from "src/service/prontuario/prontuario.service";
+import { ProntuarioDto } from "src/prontuario/dto/prontuario.dto";
+import { ProntuarioService } from "src/prontuario/prontuario.service";
 
 @Controller('prontuario')
 export class ProntuarioController {

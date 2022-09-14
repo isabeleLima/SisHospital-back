@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ProntuarioDto } from "src/model/prontuario/dto/prontuario.dto";
-import { Prontuario } from "src/model/prontuario/prontuario.entity";
+import { ProntuarioDto } from "src/prontuario/dto/prontuario.dto";
+import { Prontuario } from "src/prontuario/prontuario.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
