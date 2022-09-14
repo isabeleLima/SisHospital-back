@@ -6,6 +6,10 @@ import { User } from './user/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { UsersService } from './user/user.service';
+import { Prontuario } from './model/prontuario/prontuario.entity';
+import { Paciente } from './model/paciente/paciente.entity';
+import { ProntuarioService } from './service/prontuario/prontuario.service';
+import { PacienteService } from './service/paciente/paciente.service';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -17,12 +21,12 @@ import { UsersService } from './user/user.service';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       synchronize: true,
-      entities: [User],
+      entities: [User, Prontuario, Paciente],
     }),
     UserModule,
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [UsersService, User],
+  providers: [UsersService, User, ProntuarioService, PacienteService],
 })
 export class AppModule {}
