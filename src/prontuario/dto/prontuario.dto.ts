@@ -1,12 +1,14 @@
-import { IsBoolean, IsDate, IsEmail, IsString, Matches } from "class-validator";
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
+import { StatusEnum } from '../../commons/status.enum';
 
 export class ProntuarioDto {
-    @IsBoolean()
-    aberto: boolean;
+  @IsEnum(StatusEnum)
+  status: string;
 
-    @IsString()
-    observacao: string;
+  @IsOptional()
+  @IsString()
+  observation: string;
 
-    @IsBoolean()
-    retorno: boolean;
+  @IsBoolean()
+  return: boolean;
 }

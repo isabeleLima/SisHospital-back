@@ -1,16 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('prontuario')
 export class Prontuario {
-    @PrimaryGeneratedColumn()
-    public id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    public aberto: boolean;
-    
-    @Column()
-    public observacao: string;
-    
-    @Column()
-    public retorno: boolean;
+  @Column()
+  public status: string;
+
+  @Column({ nullable: true })
+  public observation: string;
+
+  @Column()
+  public return: boolean;
 }

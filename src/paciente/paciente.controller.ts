@@ -1,23 +1,28 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { PacienteDto } from "src/paciente/dto/paciente.dto";
-import { PacienteService } from "src/paciente/paciente.service";
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { PacienteDto } from '../paciente/dto/paciente.dto';
+import { PacienteService } from '../paciente/paciente.service';
 
 @Controller('paciente')
 export class PacienteController {
-    constructor(private readonly pacienteService: PacienteService) {}
+  constructor(private readonly pacienteService: PacienteService) {}
 
-    @Post('create')
-    async create(@Body('paciente') paciente: PacienteDto) {
-        return this.pacienteService.save(paciente);
-    }
+  @Post()
+  async create(@Body() paciente: PacienteDto) {
+    return this.pacienteService.create(paciente);
+  }
 
-    @Get('/:id')
-    async findById(@Param() params) {
-        return this.pacienteService.findOne(params.id);
-    }
+  @Get()
+  async index() {
+    return this.pacienteService.findAll();
+  }
 
-    @Delete('delete/:id')
-    async remove(@Param() params) {
-        return this.pacienteService.remove(params.id);
-    }
+  @Get('/:id')
+  async findById(@Param() params) {
+    return this.pacienteService.findOne(params.id);
+  }
+
+  @Delete('/:id')
+  async remove(@Param() params) {
+    return this.pacienteService.remove(params.id);
+  }
 }

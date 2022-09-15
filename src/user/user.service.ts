@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -33,11 +33,17 @@ export class UsersService {
     }
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: string): Promise<any> {
     try {
       const user = await this.userRepository.findOneByOrFail({ id });
 
-      await this.userRepository.delete(user.id);
+      await this.userRepository.delete(user.id).catch(() => {
+        throw new InternalServerErrorException();
+      });
+
+      return {
+        message: 'user deleted successfully',
+      };
     } catch (error) {
       console.log(error);
       return error;

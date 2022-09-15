@@ -1,18 +1,18 @@
 import { Test } from '@nestjs/testing';
-import { UserController } from '../user.controller';
-import { UsersService } from '../user.service';
+import { ProntuarioController } from '../prontuario.controller';
+import { ProntuarioService } from '../prontuario.service';
 import { stub } from 'sinon';
 
-describe('UserController', () => {
-  let controller: UserController;
-  let service: UsersService;
+describe('ProntuarioController', () => {
+  let controller: ProntuarioController;
+  let service: ProntuarioService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      controllers: [UserController],
+      controllers: [ProntuarioController],
       providers: [
         {
-          provide: UsersService,
+          provide: ProntuarioService,
           useValue: {
             findOne: jest.fn(),
             create: jest.fn(),
@@ -23,17 +23,15 @@ describe('UserController', () => {
       ],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
-    controller = module.get<UserController>(UserController);
+    service = module.get<ProntuarioService>(ProntuarioService);
+    controller = module.get<ProntuarioController>(ProntuarioController);
   });
-  it('should return successfuly if service finds user by id', async () => {
+  it('should return successfuly if service finds prontuario by id', async () => {
     stub(service, 'findOne').resolves({
+      status: 'ABERTO',
+      return: true,
       id: '62e77c98-3469-11ed-a261-0242ac120002',
-      name: 'teste',
-      email: 'email@gmail.com',
-      password: '123',
-      cpf: '000.000.000-00',
-      type: 'MEDICO',
+      observation: '',
     });
 
     const response = await controller.findById(
@@ -41,12 +39,10 @@ describe('UserController', () => {
     );
 
     expect(response).toMatchObject({
+      status: expect.any(String),
+      return: expect.any(Boolean),
       id: expect.any(String),
-      name: expect.any(String),
-      email: expect.any(String),
-      password: expect.any(String),
-      cpf: expect.any(String),
-      type: expect.any(String),
+      observation: expect.any(String),
     });
   });
 
@@ -58,30 +54,25 @@ describe('UserController', () => {
     });
   });
 
-  it('should return successfuly if service creates user', async () => {
+  it('should return successfuly if service creates prontuario', async () => {
     stub(service, 'create').resolves({
-      name: 'Doctor WHO',
-      email: 'doctorrrr@gmail.com',
-      password: '123',
-      cpf: '123.223.456-88',
-      type: 'MEDICO',
+      status: 'ABERTO',
+      return: true,
       id: '62e77c98-3469-11ed-a261-0242ac120002',
+      observation: '',
     });
 
     const response = await controller.create({
-      name: 'Doctor WHO',
-      email: 'doctorrrr@gmail.com',
-      password: '123',
-      cpf: '123.223.456-88',
-      type: 'MEDICO',
+      status: 'ABERTO',
+      return: true,
+      observation: '',
     });
 
     expect(response).toMatchObject({
-      name: expect.any(String),
-      email: expect.any(String),
-      password: expect.any(String),
-      cpf: expect.any(String),
-      type: expect.any(String),
+      status: expect.any(String),
+      return: expect.any(Boolean),
+      id: expect.any(String),
+      observation: expect.any(String),
     });
   });
 
@@ -95,7 +86,7 @@ describe('UserController', () => {
       });
   });
 
-  it('should remove successfully a enterprises', async () => {
+  it('should remove successfully a prontuario', async () => {
     stub(service, 'remove').resolves([]);
 
     await controller

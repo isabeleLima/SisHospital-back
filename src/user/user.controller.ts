@@ -7,7 +7,11 @@ export class UserController {
   constructor(private userService: UsersService) {}
   @Get()
   async index() {
-    return this.userService.findAll();
+    try {
+      return this.userService.findAll();
+    } catch (e) {
+      throw e;
+    }
   }
 
   @Get('/:id')

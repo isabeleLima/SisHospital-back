@@ -1,23 +1,47 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { PacienteDto } from "src/paciente/dto/paciente.dto";
-import { Paciente } from "src/paciente/paciente.entity";
-import { Repository } from "typeorm";
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PacienteDto } from '../paciente/dto/paciente.dto';
+import { Paciente } from '../paciente/paciente.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PacienteService {
-    constructor(@InjectRepository(Paciente) private readonly pacienteRepository: Repository<Paciente>) {}
+  constructor(
+    @InjectRepository(Paciente)
+    private readonly pacienteRepository: Repository<Paciente>,
+  ) {}
 
-    async save(data: PacienteDto): Promise<Paciente> {
-        return this.pacienteRepository.save(data);
-    }
+  async create(data: PacienteDto): Promise<Paciente> {
+    return this.pacienteRepository.save(data);
+  }
 
-    async findOne(condition: any): Promise<Paciente> {
-        return this.pacienteRepository.findOne(condition);
+  findOne(id: string): Promise<Paciente> {
+    try {
+      return this.pacienteRepository.findOneByOrFail({ id });
+    } catch (error) {
+      console.log(error);
+      return error;
     }
+  }
 
-    async remove(id: number): Promise<void> {
-        const paciente = await this.pacienteRepository.findOneByOrFail({ id });
-        await this.pacienteRepository.delete(paciente.id);
+  findAll(): Promise<Paciente[]> {
+    return this.pacienteRepository.find();
+  }
+
+  async remove(id: string): Promise<any> {
+    try {
+      const user = await this.pacienteRepository.findOneByOrFail({ id });
+
+      await this.pacienteRepository.delete(user.id).catch(() => {
+        throw new InternalServerErrorException();
+      });
+
+      return {
+        message: 'user deleted successfully',
+      };
+    } catch (error) {
+      console.log(error);
+      return error;
     }
+  }
 }

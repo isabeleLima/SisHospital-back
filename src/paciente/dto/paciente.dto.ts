@@ -1,23 +1,30 @@
-import { IsDate, IsEmail, IsString, Matches } from "class-validator";
+import {
+  IsDate,
+  IsEmail,
+  IsOptional,
+  IsString,
+  Matches,
+} from 'class-validator';
 
 export class PacienteDto {
-    @IsString()
-    name: string;
+  @IsString()
+  name: string;
 
-    @IsEmail()
-    email: string;
+  @IsEmail()
+  email: string;
 
-    @Matches(/(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)/, {
-        message: 'cpf must match XXX.XXX.XXX-XX',
-    })
-    cpf: string;
+  @Matches(/(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)/, {
+    message: 'cpf must match XXX.XXX.XXX-XX',
+  })
+  cpf: string;
 
-    @IsDate()
-    nascimento
+  @IsDate()
+  birth_date: Date;
 
-    @IsString()
-    endereco: string;
-    
-    @IsString()
-    observacao: string;
+  @IsString()
+  address: string;
+
+  @IsOptional()
+  @IsString()
+  observation: string;
 }

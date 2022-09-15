@@ -1,26 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('paciente')
 export class Paciente {
-    @PrimaryGeneratedColumn()
-    public id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    public nome: string;
+  @Column()
+  public name: string;
 
-    @Column()
-    public nascimento: Date;
+  @Column()
+  public birth_date: Date;
 
-    @Column({ unique: true })
-    public cpf: string;
+  @Column({ unique: true })
+  public cpf: string;
 
-    @Column()
-    public email: string;
+  @Column()
+  public email: string;
 
-    @Column()
-    public endereco: string;
+  @Column()
+  public address: string;
 
-    @Column()
-    public observacao: string;
-
+  @Column({ nullable: true })
+  public observation: string;
 }
