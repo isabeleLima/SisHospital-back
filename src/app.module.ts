@@ -1,21 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
 
-import { User } from './user/user.entity';
-import { UserModule } from './user/user.module';
-import { UsersService } from './user/user.service';
+import { User } from './modules/user/user.entity';
+import { UserModule } from './modules/user/user.module';
+import { UsersService } from './modules/user/user.service';
 
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 
-import { Prontuario } from './prontuario/prontuario.entity';
-import { ProntuarioModule } from './prontuario/prontuario.module';
-import { ProntuarioService } from './prontuario/prontuario.service';
+import { Prontuario } from './modules/prontuario/prontuario.entity';
+import { ProntuarioModule } from './modules/prontuario/prontuario.module';
+import { ProntuarioService } from './modules/prontuario/prontuario.service';
 
-import { Paciente } from './paciente/paciente.entity';
-import { PacienteService } from './paciente/paciente.service';
-import { PacienteModule } from './paciente/paciente.module';
+import { Paciente } from './modules/paciente/paciente.entity';
+import { PacienteService } from './modules/paciente/paciente.service';
+import { PacienteModule } from './modules/paciente/paciente.module';
 
 @Module({
   imports: [
@@ -36,7 +35,7 @@ import { PacienteModule } from './paciente/paciente.module';
     ProntuarioModule,
     PacienteModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [UsersService, User, ProntuarioService, PacienteService],
 })
 export class AppModule {}

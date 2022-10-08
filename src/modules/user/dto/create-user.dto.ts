@@ -1,5 +1,5 @@
 import { IsString, IsEmail, IsEnum, Matches } from 'class-validator';
-import { TypesEnum } from '../../commons/typs.enum';
+import { TypesEnum } from '../../../commons/enums/types.enum';
 
 export class CreateUserDto {
   @IsString()
@@ -16,5 +16,5 @@ export class CreateUserDto {
   cpf: string;
 
   @IsEnum(TypesEnum)
-  type: string;
+  role: string;
 }

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
+import { UserJwtToken } from 'src/commons/decorators/jwt-payload.decorator';
 @Injectable()
 export class UsersService {
   constructor(
@@ -53,5 +54,10 @@ export class UsersService {
   async create(user: CreateUserDto): Promise<User> {
     user.password = await bcrypt.hash(user.password, 10);
     return this.userRepository.save(user);
+  }
+
+  async update(req: any): Promise<any> {
+    console.log(req);
+    return req;
   }
 }

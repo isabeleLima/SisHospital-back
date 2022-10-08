@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProntuarioDto } from '../prontuario/dto/prontuario.dto';
 import { Prontuario } from '../prontuario/prontuario.entity';
 import { Repository } from 'typeorm';
-
+import { CreateMedicationDto } from './dto/create-medication.dto';
 @Injectable()
 export class ProntuarioService {
   constructor(
@@ -44,4 +44,19 @@ export class ProntuarioService {
       return error;
     }
   }
+
+  // async addMedication(
+  //   prontuarioId: string,
+  //   medication: CreateMedicationDto,
+  // ): Promise<Prontuario> {
+  //   try {
+  //     const prontuario = await this.prontuarioRepository.findOneByOrFail({
+  //       id: prontuarioId,
+  //     });
+
+  //   } catch (error) {
+  //     console.log(error);
+  //     return error;
+  //   }
+  // }
 }

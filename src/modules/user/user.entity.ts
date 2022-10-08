@@ -18,5 +18,5 @@ export class User {
   cpf: string;
 
   @Column()
-  type: string; //medico, enfermeiro, técnico
+  role: string; //medico, enfermeiro, técnico
 }
