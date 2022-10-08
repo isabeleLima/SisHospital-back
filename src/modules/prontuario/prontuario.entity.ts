@@ -28,7 +28,7 @@ export class Prontuario {
   @Column('jsonb', { nullable: true })
   public operations?: object[];
 
-  @OneToOne(() => Paciente, { cascade: true })
+  @OneToOne(() => Paciente)
   @JoinColumn()
   paciente: Paciente;
 }

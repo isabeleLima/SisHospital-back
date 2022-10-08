@@ -5,20 +5,38 @@ export class Paciente {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ default: 'jhon doe' })
   public name: string;
 
-  @Column()
+  @Column({ nullable: true })
   public birth_date: Date;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   public cpf: string;
 
-  @Column()
+  @Column({ unique: true, nullable: true })
+  public rg: string;
+
+  @Column({ nullable: true })
   public email: string;
 
-  @Column()
+  @Column({ nullable: true })
+  public telephone: string;
+
+  @Column({ nullable: true })
   public address: string;
+
+  @Column({ nullable: true })
+  public bloodType: string;
+
+  @Column('simple-array', { nullable: true })
+  public chronicDisease: string[];
+
+  @Column('simple-array', { nullable: true })
+  public allergies: string[];
+
+  @Column({ nullable: true })
+  public emergencyContacts: string;
 
   @Column({ nullable: true })
   public observation: string;

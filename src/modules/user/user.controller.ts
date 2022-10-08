@@ -23,7 +23,6 @@ import { UsersService } from './user.service';
 export class UserController {
   constructor(private userService: UsersService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Roles(TypesEnum.ENFERMEIRO)
   @Get()
   async index() {

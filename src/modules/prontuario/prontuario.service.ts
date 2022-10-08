@@ -4,6 +4,7 @@ import { ProntuarioDto } from '../prontuario/dto/prontuario.dto';
 import { Prontuario } from '../prontuario/prontuario.entity';
 import { Repository } from 'typeorm';
 import { CreateMedicationDto } from './dto/create-medication.dto';
+
 @Injectable()
 export class ProntuarioService {
   constructor(
@@ -12,11 +13,20 @@ export class ProntuarioService {
   ) {}
 
   async create(data: ProntuarioDto): Promise<Prontuario> {
-    return this.prontuarioRepository.save(data);
+    try {
+      return this.prontuarioRepository.save(data);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 
   findAll(): Promise<Prontuario[]> {
-    return this.prontuarioRepository.find();
+    return this.prontuarioRepository.find({
+      relations: {
+        paciente: true,
+      },
+    });
   }
 
   findOne(id: string): Promise<Prontuario> {
@@ -44,19 +54,4 @@ export class ProntuarioService {
       return error;
     }
   }
-
-  // async addMedication(
-  //   prontuarioId: string,
-  //   medication: CreateMedicationDto,
-  // ): Promise<Prontuario> {
-  //   try {
-  //     const prontuario = await this.prontuarioRepository.findOneByOrFail({
-  //       id: prontuarioId,
-  //     });
-
-  //   } catch (error) {
-  //     console.log(error);
-  //     return error;
-  //   }
-  // }
 }
