@@ -56,7 +56,7 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  async update(req: any): Promise<any> {
+  async update(req: UserJwtToken): Promise<UserJwtToken> {
     console.log(req);
     return req;
   }

@@ -7,7 +7,6 @@ import {
   Post,
   Put,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 import {
   JwtPayload,
@@ -45,15 +44,16 @@ export class UserController {
   create(@Body() user: CreateUserDto) {
     return this.userService.create(user);
   }
+
   @Delete('/:id')
   async remove(@Param() params) {
     return this.userService.remove(params.id);
   }
 
   @Put()
-  async updateUser(@Request() req: any) {
+  async update(@JwtPayload() payload: UserJwtToken) {
     try {
-      return await this.userService.update(req.user);
+      return await this.userService.update(payload);
     } catch (e) {
       throw e;
     }
