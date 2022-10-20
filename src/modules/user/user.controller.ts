@@ -6,7 +6,6 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import {
   JwtPayload,
@@ -15,7 +14,7 @@ import {
 import { Public } from 'src/commons/decorators/public-rout.decorator';
 import { Roles } from 'src/commons/decorators/roles.decorator';
 import { TypesEnum } from 'src/commons/enums/types.enum';
-import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
+
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './user.service';
 

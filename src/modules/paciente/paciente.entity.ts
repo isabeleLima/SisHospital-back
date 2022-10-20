@@ -11,6 +11,9 @@ export class Paciente {
   @Column({ nullable: true })
   public birth_date: Date;
 
+  @Column({ nullable: true })
+  public mother_name: string;
+
   @Column({ unique: true, nullable: true })
   public cpf: string;
 
@@ -30,7 +33,7 @@ export class Paciente {
   public bloodType: string;
 
   @Column('simple-array', { nullable: true })
-  public chronicDisease: string[];
+  public APP: string[]; //antecendentes pessoais patológicos
 
   @Column('simple-array', { nullable: true })
   public allergies: string[];

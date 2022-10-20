@@ -19,6 +19,12 @@ export class Prontuario {
   @Column({ nullable: true })
   public observation: string;
 
+  @Column({ default: 5 })
+  public priority: number; // 5 to 1
+
+  @Column('simple-array', { nullable: true })
+  public symptoms: string[];
+
   @Column()
   public return: boolean;
 

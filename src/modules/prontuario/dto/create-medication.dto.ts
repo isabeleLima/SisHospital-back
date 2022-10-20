@@ -1,16 +1,36 @@
-import { IsBoolean, IsEnum, IsString, IsUUID } from 'class-validator';
+import {
+  IsDate,
+  IsDateString,
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { MeasurementEnum } from '../../../commons/enums/measurement.enum';
 
 export class CreateMedicationDto {
   @IsEnum(MeasurementEnum)
   measurement: string;
 
+  value: number;
+
   @IsString()
-  name?: string;
+  name: string;
 
-  @IsBoolean()
-  return: boolean;
+  @IsString()
+  description: string;
 
+  @IsString()
+  frequency: number; //in hours
+
+  @IsDate()
+  createde_at: Date;
+
+  @IsOptional()
   @IsUUID()
-  userId: string;
+  userId?: string;
+
+  @IsOptional()
+  @IsString()
+  professionalName?: string;
 }
