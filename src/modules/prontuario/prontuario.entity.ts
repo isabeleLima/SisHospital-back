@@ -17,6 +17,9 @@ export class Prontuario {
   public status: string;
 
   @Column({ nullable: true })
+  public qrcode: string;
+
+  @Column({ nullable: true })
   public observation: string;
 
   @Column({ default: 5 })

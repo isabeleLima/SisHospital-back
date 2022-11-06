@@ -109,7 +109,6 @@ export class ProntuarioService {
 
   async generateQRCOde(id: string) {
     try {
-      console.log(id);
       const prontuario = await this.prontuarioRepository.find({
         relations: ['paciente'],
         where: {
@@ -123,6 +122,30 @@ export class ProntuarioService {
       const urlToProntuario = `localhost:3000/prontuario/${prontuario[0].id}`;
 
       QRCode.toFile(`src/qrCodes/${prontuario[0].id}.png`, urlToProntuario);
+
+      const urlToFront = `${process.env.URL_TO_FRONT}src/qrCodes/${prontuario[0].id}.png`;
+
+      prontuario[0].qrcode = urlToFront;
+
+      return this.prontuarioRepository.save(prontuario[0]);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  async returnQRCOde(id: string) {
+    try {
+      const prontuario = await this.prontuarioRepository.find({
+        relations: ['paciente'],
+        where: {
+          id: id,
+        },
+      });
+      if (!prontuario[0]) {
+        throw new Error('prontuario não encontrado');
+      }
+      return prontuario[0].qrcode;
     } catch (error) {
       console.log(error);
       return error;

@@ -15,7 +15,7 @@ export class ProntuarioController {
   async create(@Body() prontuario: ProntuarioDto) {
     return this.prontuarioService.create(prontuario);
   }
-
+  @Public()
   @Get()
   async index() {
     return this.prontuarioService.findAll();
@@ -35,6 +35,12 @@ export class ProntuarioController {
   @Get('qrcode/:id')
   async GenerateQRCode(@Param() params) {
     return this.prontuarioService.generateQRCOde(params.id);
+  }
+
+  @Public()
+  @Get('qrcode/return/:id')
+  async returnQRCode(@Param() params) {
+    return this.prontuarioService.returnQRCOde(params.id);
   }
 
   @Post('addMedication/:id')
