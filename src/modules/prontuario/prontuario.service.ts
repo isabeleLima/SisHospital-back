@@ -123,7 +123,7 @@ export class ProntuarioService {
 
       QRCode.toFile(`src/qrCodes/${prontuario[0].id}.png`, urlToProntuario);
 
-      const urlToFront = `${process.env.URL_TO_FRONT}src/qrCodes/${prontuario[0].id}.png`;
+      const urlToFront = `./qrCodes/${prontuario[0].id}.png`;
 
       prontuario[0].qrcode = urlToFront;
 
