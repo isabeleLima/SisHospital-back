@@ -125,7 +125,7 @@ export class ProntuarioService {
         `${process.env.URL_TO_PUBLIC}/qrCodes/${prontuario[0].id}.png`,
         urlToProntuario,
       );
-      const urlToFront = `./qrCodes/${prontuario[0].id}.png`;
+      const urlToFront = `/qrCodes/${prontuario[0].id}.png`;
       prontuario[0].qrcode = urlToFront;
 
       return this.prontuarioRepository.save(prontuario[0]);
